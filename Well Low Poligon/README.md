@@ -1,7 +1,3 @@
-# 🪣 Well Low Poly
-
-Un pozzo in stile low poly realizzato in Blender, con tetto in tegole, rullo con manovella e una piccola base di terreno con rocce.
-
 ![Render del pozzo low poly](Renders/Well-4k.png)
 
 ## 📋 Dettagli
