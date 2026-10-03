@@ -58,14 +58,3 @@ Snow Cabin Low Poligon/
 │   └── SnowCabin-NoSnow.png  # Render senza neve
 └── README.md
 ```
-
----
-
-## 🚀 Prossimi passi
-
-- [ ] Fumo dai comignoli
-- [ ] Ghiaccioli sotto le gronde
-- [ ] Lanterne lungo il sentiero
-- [ ] Abeti innevati attorno al villaggio
-- [ ] Color grading con *Color Balance* nel Compositor
-- [ ] Animazione in loop: neve che cade, finestre che tremolano, camera che ruota

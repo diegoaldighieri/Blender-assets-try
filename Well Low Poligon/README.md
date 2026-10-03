@@ -1,6 +1,8 @@
+# 🪣 Well Low Poly
+
 ![Render del pozzo low poly](Renders/Well-4k.png)
 
-# 🪣 Well Low Poly
+
  
 Un pozzo in stile low poly realizzato in Blender, con tetto in tegole, rullo con manovella e una piccola base di terreno con rocce.
 
@@ -37,10 +39,3 @@ Per riutilizzare il pozzo in un'altra scena: **File → Append**, seleziona `Wel
 - Materiali indipendenti per oggetto con **Make Single User → Materials**
 - Illuminazione con più luci **Sun**
 - Render in 4K con Cycles
-
-## 🔜 Prossimi passi
-
-- [ ] Aggiungere un secchio e la corda avvolta sul rullo
-- [ ] Inserire l'acqua dentro il pozzo
-- [ ] Arricchire il terreno con erba e piante
-- [ ] Migliorare l'illuminazione (key / fill / rim)
