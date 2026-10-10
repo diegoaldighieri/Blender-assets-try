@@ -88,16 +88,6 @@ Violet Haze/
 
 ---
 
-## 🎓 Cosa ho imparato
-
-- In **Material Preview** Blender usa un HDRI di default e ignora il World: per valutare vetro e Light Path serve la modalità **Rendered** in Cycles
-- I **driver** (`#frame`, `sin`, `cos`, `radians`) sono il modo più semplice per ottenere animazioni in loop perfetto
-- Con la **parentela** (`Ctrl+P`) nebbia e stelle seguono la rotazione del cubo; *Without Inverse* fa coincidere lo 0,0,0 con il centro del genitore
-- Nei Geometry Nodes il nodo **Set Material** mostra solo materiali già esistenti
-- I **volumi** sono la parte più pesante del render: Step Rate e Max Steps fanno la differenza più grande
-
----
-
 ## 🚀 Prossimi passi
 
 - [ ] Nodo **Glare** (Fog Glow) nel Compositing per far brillare stelle e nebbia
@@ -106,8 +96,3 @@ Violet Haze/
 - [ ] Contorno nero stile fumetto sulle stelle
 - [ ] Versione da 10 secondi per i social
 
----
-
-## 🙏 Crediti
-
-Progetto ispirato a un tutorial pubblicato su Instagram, rielaborato con animazione tramite driver, stelle a movimento libero e ottimizzazione del render.
