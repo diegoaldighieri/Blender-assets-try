@@ -1,61 +1,99 @@
 # Materials Pack
 
-Libreria di materiali procedurali per Blender, pronta da usare nell'Asset Browser.
-Tutti i materiali sono fatti solo con nodi: niente texture esterne, file leggero e nessun problema di licenza.
+Una raccolta di materiali procedurali per Blender, pronti da usare dall'**Asset Browser**. Ogni materiale è costruito interamente con i nodi, senza texture esterne, quindi funziona a qualsiasi risoluzione e si può modificare liberamente.
 
-## Anteprime
+## Anteprima
 
-| Water Orb | Stone | Ice |
-| :---: | :---: | :---: |
-| <img src="previews/water_orb.png" width="260" alt="Water Orb"> | <img src="previews/stone.png" width="260" alt="Stone"> | <img src="previews/ice.png" width="260" alt="Ice"> |
+| | | |
+|:---:|:---:|:---:|
+| ![Dirty Glass](previews/dirty-glass.png) | ![Dispersion Glass](previews/dispersion_glass.png) | ![Gold](previews/gold.png) |
+| **Dirty Glass** | **Dispersion Glass** | **Gold** |
+| ![Ice](previews/ice.png) | ![Plasma](previews/plasma.png) | ![Stone](previews/stone.png) |
+| **Ice** | **Plasma** | **Stone** |
+| ![Water Orb](previews/water_orb.png) | | |
+| **Water Orb** | | |
 
-## Materiali
+## Requisiti
 
-| Materiale | Come è fatto | Note |
-| --- | --- | --- |
-| **Water Orb** | Tre Glass BSDF (rosso, verde, blu) con IOR leggermente diversi, sommati con Add Shader per simulare la dispersione della luce. Noise Texture per il displacement. | Animato: la rotazione del Mapping è guidata da un driver. |
-| **Stone** | Noise Texture e Voronoi distorto con un Mix in modalità Linear Light. Color Ramp per colore e roughness, Bump e Displacement per il rilievo. | Il Linear Light dà alle celle bordi irregolari e organici. |
-| **Ice** | Principled BSDF con Transmission. Voronoi F1 per i blocchi in displacement, un secondo Voronoi in Distance to Edge per le crepe, Noise per la brina. | Le crepe usano le stesse coordinate dei blocchi, quindi combaciano con i bordi. |
+- **Blender 5.2 LTS** o successivo
+- **Cycles** consigliato per i materiali trasparenti (Dirty Glass, Dispersion Glass, Ice, Water Orb). In EEVEE il vetro richiede il Raytracing attivo e può comunque apparire diverso.
 
-## Contenuto della cartella
+## Materiali inclusi
+
+### Dirty Glass
+Vetro trasparente con aloni di sporco e opacità irregolare.
+- Un **Noise Texture** passa per una **Color Ramp** che controlla la *Roughness* del Glass BSDF: le zone nere restano trasparenti, quelle grigie diventano satinate.
+- Una seconda Color Ramp pilota un nodo **Bump** per le micro-imperfezioni della superficie.
+- Un **Light Path** (*Is Shadow Ray*) mescola un Transparent BSDF per ombre più chiare.
+- Un **Layer Weight** (*Fresnel*) aggiunge un'Emission leggera sui bordi.
+
+**Da regolare:** la posizione delle due stop della Color Ramp della roughness decide quanto sporco c'è. Tieni lo stop di destra grigio, non bianco, per evitare macchie completamente opache.
+
+### Dispersion Glass
+Vetro con dispersione cromatica: la luce rifratta si separa nei colori dell'arcobaleno sui bordi.
+
+### Gold
+Metallo dorato.
+
+### Ice
+Ghiaccio semi-trasparente.
+
+### Plasma
+Sfera di energia viola, ispirata a un reattore al plasma.
+- Una **Wave Texture** (Bands, Sine) alimenta sia il **Displacement** sia lo shader, creando il rilievo ondulato.
+- Un **Fresnel** collegato a una **Color Ramp** dal nero al viola colora l'**Emission** in base all'angolo della superficie: è ciò che rende visibili i dettagli del rilievo.
+- Un **Layer Weight** (*Facing*) mescola emissione e pattern tramite un Mix Shader.
+
+**Da regolare:** la *Strength* dell'Emission per l'intensità del bagliore, e il *Phase Offset* della Wave Texture per animarlo (ad esempio con il driver `#frame*0.05`).
+
+**Nota:** l'impostazione del materiale deve essere *Displacement and Bump* (Material Properties → Settings). Per il bagliore usa il nodo **Glare** nel Compositor.
+
+### Stone
+Pietra.
+
+### Water Orb
+Sfera d'acqua trasparente.
+
+## Installazione
+
+1. Scarica o clona questo repository.
+2. In Blender apri **Edit → Preferences → File Paths → Asset Libraries**.
+3. Clicca **+** e seleziona la cartella `Materials-Pack`.
+4. Apri un editor **Asset Browser** e scegli la libreria appena aggiunta dal menu in alto a sinistra.
+5. Trascina un materiale direttamente su un oggetto nel viewport.
+
+> Il file `blender_assets.cats.txt` contiene le categorie dell'Asset Browser: tienilo nella stessa cartella del file `.blend`.
+
+## Consigli per la scena
+
+I materiali trasparenti mostrano ciò che hanno intorno. Se dietro l'oggetto c'è solo nero, il vetro sembrerà nero o cromato.
+
+- Usa un **fondale curvo** grigio scuro dietro l'oggetto, illuminato da un'Area Light.
+- Aggiungi due **Area Light** strette e alte ai lati per disegnare i riflessi sui bordi.
+- Se usi un HDRI per l'illuminazione ma vuoi uno sfondo scuro, nel World usa un **Mix Shader** con Factor = *Maximum* tra **Is Camera Ray** e **Is Transmission Ray**. Così lo sfondo scuro si vede sia direttamente sia attraverso il vetro.
+- Per oggetti in vetro, modella pareti e fondo con uno **spessore reale** (Inset + Extrude) e smussa i bordi con un **Bevel**.
+
+## Struttura della cartella
 
 ```
 Materials-Pack/
-├── Materials-Pack.blend      # tutti i materiali, marcati come asset
-├── blender_assets.cats.txt   # cataloghi dell'Asset Browser
-├── previews/                 # render di anteprima (uno per materiale)
+├── Materials-Pack.blend
+├── blender_assets.cats.txt
+├── previews/
+│   ├── dirty-glass.png
+│   ├── dispersion_glass.png
+│   ├── gold.png
+│   ├── ice.png
+│   ├── plasma.png
+│   ├── stone.png
+│   └── water_orb.png
 └── README.md
 ```
 
-## Come usarlo
+## Prossimi passi
 
-1. Clona il repository o scarica la cartella `Materials-Pack`.
-2. In Blender vai su **Edit → Preferences → File Paths → Asset Libraries** e clicca **+**.
-3. Seleziona la cartella `Materials-Pack` e dai un nome alla libreria, ad esempio `Materials Pack`.
-4. Imposta **Import Method** su **Append (Reuse Data)**, così lo stesso materiale non viene duplicato.
-5. Apri l'**Asset Browser**, scegli la libreria `Materials Pack` e trascina un materiale su un oggetto.
-
-### Requisiti
-
-- **Blender 5.2 LTS** (creato e testato con questa versione).
-- **Cycles** consigliato: la dispersione di Water Orb e il displacement reale funzionano al meglio in Cycles.
-- Per il displacement: in **Material Properties → Settings → Surface → Displacement** scegli **Displacement and Bump** e aggiungi un modificatore **Subdivision Surface** all'oggetto.
-
-## Come sono fatte le anteprime
-
-Tutte le anteprime usano la stessa scena, così sono confrontabili tra loro:
-
-- Cycles, 1024 × 1024 px, 512 samples, denoise attivo;
-- sfera con Subdivision Surface, stessa camera per tutti i materiali;
-- illuminazione con HDRI e sfondo neutro: un nodo Light Path (Is Camera Ray) mostra alla camera un colore uniforme, mentre riflessi e luce arrivano dall'HDRI.
-
-## Crediti
-
-- HDRI per le anteprime: [Horn-Koppe Spring](https://polyhaven.com/a/horn-koppe_spring) da Poly Haven, licenza CC0.
-
-## Prossimi materiali
-
-- [ ] Neve procedurale, da usare in Snow Cabin
-- [ ] Palette di colori low-poly per pozzo, torre e Snow Cabin
-- [ ] Node group riutilizzabili con parametri esposti
-- [ ] Versioni con bake su texture per l'esportazione in Unity
+- [ ] Completare la descrizione dei nodi per Dispersion Glass, Gold, Ice, Stone e Water Orb
+- [ ] Uniformare i nomi delle anteprime (trattino o underscore)
+- [ ] Aggiungere un'anteprima animata del Plasma (GIF o video in loop)
+- [ ] Creare una scena "studio" di riferimento con fondale e luci, inclusa nel pack
+- [ ] Definire la licenza d'uso
