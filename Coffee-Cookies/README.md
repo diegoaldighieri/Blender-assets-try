@@ -2,7 +2,7 @@
 
 Scena stilizzata di una pausa caffè: una tazzina di espresso sul piattino, un cookie con gocce di cioccolato, due meringhe e bastoncini di cannella. Progetto incentrato su **materiali procedurali** e **illuminazione a tre punti** in Cycles.
 
-![Render finale](Renders/coffee-cookies-final.png)
+![Render finale](Renders/Coffee-Cookies.png)
 
 ---
 
@@ -75,7 +75,7 @@ Schema a **tre punti** con aree luminose. I colori sono impostati in gradi Kelvi
 Coffee-Cookies/
 ├── Coffee-Cookies.blend
 ├── Renders/
-│   └── coffee-cookies-final.png
+│   └── Coffee-Cookies.png
 └── README.md
 ```
 
